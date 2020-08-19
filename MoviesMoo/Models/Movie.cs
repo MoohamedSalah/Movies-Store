@@ -40,6 +40,11 @@ namespace MoviesMoo.Models
         public Nullable<double> NumberInStock { get; set; }
 
         public Nullable<int> MemberAvalible { get; set; }
+
+        public byte[] MoviesPhoto { get; set; }
+
+
+        public string AltPhoto { get; set; }
     }
 
 }

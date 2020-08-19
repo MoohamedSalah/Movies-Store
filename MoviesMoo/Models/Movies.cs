@@ -27,6 +27,8 @@ namespace MoviesMoo.Models
         public Nullable<System.DateTime> DateAdd { get; set; }
         public Nullable<int> MemberAvalible { get; set; }
         public Nullable<double> NumberInStock { get; set; }
+        public byte[] MoviesPhoto { get; set; }
+        public string AltPhoto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rentals> Rentals { get; set; }

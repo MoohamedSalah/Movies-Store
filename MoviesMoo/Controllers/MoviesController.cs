@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MoviesMoo.Models;
+using System.Data.SqlClient;
+
+
+
 
 namespace MoviesMoo.Controllers
 {
@@ -54,6 +59,7 @@ namespace MoviesMoo.Controllers
         public ActionResult Create()
         {
             ViewBag.Genre = Genre(null);
+            ViewBag.FileUpload1 = "";
             return View();
         }
 
@@ -61,17 +67,33 @@ namespace MoviesMoo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Movies movies)
-        {
+        public ActionResult Create(Movies movies, HttpPostedFileBase Image)
+        { 
+            if(Image!=null)
+            {
+                movies.MoviesPhoto = new byte[Image.ContentLength];
+                Image.InputStream.Read(movies.MoviesPhoto, 0, Image.ContentLength);
+            }
+           
+
             ViewBag.Genre = Genre(null);
             if (db.Movies.Any(x => x.Name == movies.Name))
             {
                 ModelState.AddModelError("movies.Name", "Movie name exists");
                 return View(movies);
             }
+
             if (ModelState.IsValid)
             {
-                db.Movies.Add(movies);
+                db.spCreateMovie(movies.Id,
+                    movies.Name,
+                    movies.Genre,
+                    movies.ReleasDate,
+                    movies.DateAdd,
+                    movies.NumberInStock,
+                    movies.MemberAvalible,
+                    movies.MoviesPhoto,
+                    movies.AltPhoto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -112,7 +134,9 @@ namespace MoviesMoo.Controllers
                     movies.ReleasDate,
                     movies.DateAdd,
                     movies.NumberInStock,
-                    movies.MemberAvalible);
+                    movies.MemberAvalible,
+                    movies.MoviesPhoto,
+                    movies.AltPhoto);
 
                 db.SaveChanges();
                 return RedirectToAction("Index");

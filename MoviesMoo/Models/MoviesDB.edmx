@@ -36,6 +36,8 @@
           <Property Name="DateAdd" Type="date" />
           <Property Name="NumberInStock" Type="float" />
           <Property Name="MemberAvalible" Type="int" />
+          <Property Name="MoviesPhoto" Type="varbinary(max)" />
+          <Property Name="AltPhoto" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Rentals">
           <Key>
@@ -83,6 +85,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spCreateMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Genre" Type="nvarchar" Mode="In" />
+          <Parameter Name="ReleasDate" Type="date" Mode="In" />
+          <Parameter Name="DateAdd" Type="date" Mode="In" />
+          <Parameter Name="NumberInStock" Type="float" Mode="In" />
+          <Parameter Name="MemberAvalible" Type="int" Mode="In" />
+          <Parameter Name="MoviesPhoto" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="AltPhoto" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="spEditeMovies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="Name" Type="nvarchar" Mode="In" />
@@ -91,6 +104,8 @@
           <Parameter Name="DateAdd" Type="date" Mode="In" />
           <Parameter Name="NumberInStock" Type="float" Mode="In" />
           <Parameter Name="MemberAvalible" Type="int" Mode="In" />
+          <Parameter Name="MoviesPhoto" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="AltPhoto" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="spSaveCustmoer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -156,6 +171,8 @@
           <Property Name="MemberAvalible" Type="Int32" />
           <NavigationProperty Name="Rentals" Relationship="Models.FK_Rentals_Movies" FromRole="Movies" ToRole="Rentals" />
           <Property Name="NumberInStock" Type="Double" />
+          <Property Name="MoviesPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="AltPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Customers_MemberShipType">
           <End Role="MemberShipType" Type="Self.MemberShipType" Multiplicity="0..1" />
@@ -201,6 +218,19 @@
             <Parameter Name="DateAdd" Mode="In" Type="DateTime" />
             <Parameter Name="NumberInStock" Mode="In" Type="Double" />
             <Parameter Name="MemberAvalible" Mode="In" Type="Int32" />
+            <Parameter Name="MoviesPhoto" Mode="In" Type="Binary" />
+            <Parameter Name="AltPhoto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spCreateMovie">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Genre" Mode="In" Type="String" />
+            <Parameter Name="ReleasDate" Mode="In" Type="DateTime" />
+            <Parameter Name="DateAdd" Mode="In" Type="DateTime" />
+            <Parameter Name="NumberInStock" Mode="In" Type="Double" />
+            <Parameter Name="MemberAvalible" Mode="In" Type="Int32" />
+            <Parameter Name="MoviesPhoto" Mode="In" Type="Binary" />
+            <Parameter Name="AltPhoto" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Rentals">
@@ -270,6 +300,8 @@
           <EntitySetMapping Name="Movies">
             <EntityTypeMapping TypeName="Models.Movies">
               <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="AltPhoto" ColumnName="AltPhoto" />
+                <ScalarProperty Name="MoviesPhoto" ColumnName="MoviesPhoto" />
                 <ScalarProperty Name="NumberInStock" ColumnName="NumberInStock" />
                 <ScalarProperty Name="MemberAvalible" ColumnName="MemberAvalible" />
                 <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
@@ -293,6 +325,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spSaveCustmoer" FunctionName="Models.Store.spSaveCustmoer" />
           <FunctionImportMapping FunctionImportName="spEditeMovies" FunctionName="Models.Store.spEditeMovies" />
+          <FunctionImportMapping FunctionImportName="spCreateMovie" FunctionName="Models.Store.spCreateMovie" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

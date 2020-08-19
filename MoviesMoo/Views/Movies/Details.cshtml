@@ -1,62 +1,62 @@
 ﻿@model MoviesMoo.Models.Movies
 
 @{
-     
+
 }
 
-<!DOCTYPE html>
+<div>
+    <h4>Movies</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>Movies</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Genre)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleasDate)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Genre)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.ReleasDate)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReleasDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAdd)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ReleasDate)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.DateAdd)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateAdd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberInStock)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.DateAdd)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.NumberInStock)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumberInStock)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.NumberInStock)
-            </dd>
+        @{
+            if (Model.MoviesPhoto != null)
+            {
+                string imageBase64 = Convert.ToBase64String(Model.MoviesPhoto);
+                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                
+                <img src="@imageSrc" width="80%" height="350" />
+            }
+        }
 
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) |
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
-    </p>
-</body>
-</html>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) |
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+</p>
