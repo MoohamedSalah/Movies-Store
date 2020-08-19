@@ -17,7 +17,6 @@ namespace MoviesMoo.Models
         public int Id { get; set; }
 
         [Remote("IsUserNameAvailableMov", "Movies", ErrorMessage = "Movies Name already in use.")]
-        [Required]
         [MaxLength(50)]
         [Display(Name ="Movies Name")]
         public string Name { get; set; }

@@ -17,12 +17,11 @@ namespace MoviesMoo.Models
     {
         public int Id { get; set; }
 
-  
-        [Required]
         [MaxLength(50)]
         [Display(Name = "Customer Name")]
         public string Name { get; set; }
 
+        [Required]
         [Display(Name = "Is Subscribed")]
         public bool IsSubscribedToNewsLetter { get; set; }
 

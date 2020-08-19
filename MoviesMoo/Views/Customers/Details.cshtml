@@ -4,57 +4,48 @@
 
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>Customers</h4>
-        <hr />
-        <dl class="dl-horizontal">
+<div>
+    <h4>Customers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSubscribedToNewsLetter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsSubscribedToNewsLetter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberShipType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberShipType.Name)
+        </dd>
+        @if (Model.Birthdate != null)
+        {
+
             <dt>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Birthdate)
             </dt>
+        }
+        <dd>
+            @Html.DisplayFor(model => model.Birthdate)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.IsSubscribedToNewsLetter)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.IsSubscribedToNewsLetter)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.MemberShipType.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.MemberShipType.Name)
-            </dd>
-            @if (Model.Birthdate != null)
-            {
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Birthdate)
-                </dt>
-            }
-            <dd>
-                @Html.DisplayFor(model => model.Birthdate)
-            </dd>
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) |
-        @Html.ActionLink("Back to List", "Index",null,new { @class="btn btn-primary"})
-    </p>
-</body>
-</html>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) |
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+</p>

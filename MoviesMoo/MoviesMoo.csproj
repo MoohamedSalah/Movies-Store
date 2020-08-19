@@ -207,6 +207,7 @@
     <Compile Include="Models\Movies.cs">
       <DependentUpon>MoviesDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MoviesBusinessLayer.cs" />
     <Compile Include="Models\MoviesDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

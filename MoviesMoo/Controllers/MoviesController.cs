@@ -75,14 +75,14 @@ namespace MoviesMoo.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-           
+
             return View(movies);
         }
 
         // GET: Movies/Edit/5
         public ActionResult Edit(int? id)
         {
-           
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -100,11 +100,20 @@ namespace MoviesMoo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Movies movies)
+        public ActionResult Edit([Bind(Exclude = "Name")]Movies movies)
         {
+            movies.Name = db.Movies.SingleOrDefault(x => x.Id == movies.Id).Name;
+
             if (ModelState.IsValid)
             {
-                db.Entry(movies).State = EntityState.Modified;
+                db.spEditeMovies(movies.Id,
+                    movies.Name,
+                    movies.Genre,
+                    movies.ReleasDate,
+                    movies.DateAdd,
+                    movies.NumberInStock,
+                    movies.MemberAvalible);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

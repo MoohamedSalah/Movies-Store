@@ -83,6 +83,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spEditeMovies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Genre" Type="nvarchar" Mode="In" />
+          <Parameter Name="ReleasDate" Type="date" Mode="In" />
+          <Parameter Name="DateAdd" Type="date" Mode="In" />
+          <Parameter Name="NumberInStock" Type="float" Mode="In" />
+          <Parameter Name="MemberAvalible" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSaveCustmoer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsSubscribedToNewsLetter" Type="bit" Mode="In" />
+          <Parameter Name="MembershipID" Type="int" Mode="In" />
+          <Parameter Name="Birthdate" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberShipType" EntityType="Self.MemberShipType" Schema="dbo" store:Type="Tables" />
@@ -170,6 +186,22 @@
             <End Role="Movies" EntitySet="Movies" />
             <End Role="Rentals" EntitySet="Rentals" />
           </AssociationSet>
+          <FunctionImport Name="spSaveCustmoer">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="IsSubscribedToNewsLetter" Mode="In" Type="Boolean" />
+            <Parameter Name="MembershipID" Mode="In" Type="Int32" />
+            <Parameter Name="Birthdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spEditeMovies">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Genre" Mode="In" Type="String" />
+            <Parameter Name="ReleasDate" Mode="In" Type="DateTime" />
+            <Parameter Name="DateAdd" Mode="In" Type="DateTime" />
+            <Parameter Name="NumberInStock" Mode="In" Type="Double" />
+            <Parameter Name="MemberAvalible" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Rentals">
           <Key>
@@ -259,6 +291,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spSaveCustmoer" FunctionName="Models.Store.spSaveCustmoer" />
+          <FunctionImportMapping FunctionImportName="spEditeMovies" FunctionName="Models.Store.spEditeMovies" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

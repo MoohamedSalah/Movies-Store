@@ -22,8 +22,8 @@ namespace MoviesMoo.Controllers
             var customers = db.Customers.Include(c => c.MemberShipType);
             return View(customers.ToList());
         }
-       
-       
+
+
 
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
@@ -43,19 +43,19 @@ namespace MoviesMoo.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-          
+
             var memberShipTypes = db.MemberShipType.ToList();
             var viewModel = new VMCustomerMemberType
             {
-                
+
                 MemberShipType = memberShipTypes
             };
-           
+
             return View(viewModel);
         }
 
         // POST: Customers/Create
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create( Customers customers)
@@ -77,7 +77,7 @@ namespace MoviesMoo.Controllers
                 return RedirectToAction("Index");
             }
 
-            
+
             return View(viewModel);
         }
 
@@ -98,18 +98,26 @@ namespace MoviesMoo.Controllers
         }
 
         // POST: Customers/Edit/5
-      
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Customers customers)
+        public ActionResult Edit([Bind(Exclude = "Name")]Customers customers)
         {
+            customers.Name = db.Customers.SingleOrDefault(x => x.Id == customers.Id).Name;
+
             if (ModelState.IsValid)
             {
-                db.Entry(customers).State = EntityState.Modified;
+                db.spSaveCustmoer(customers.Id,
+                    customers.Name,
+                    customers.IsSubscribedToNewsLetter,
+                    customers.MembershipID,
+                    customers.Birthdate);
+               
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.MembershipID = new SelectList(db.MemberShipType, "Id", "Name", customers.MembershipID);
+           
             return View(customers);
         }
 
