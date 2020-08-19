@@ -20,11 +20,19 @@ namespace MoviesMoo
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootbox.js",
+                      "~/Scripts/respond.min.js",
+                      "~/Scripts/DataTables/jquery.dataTables.js",
+                      "~/Scripts/DataTables/dataTables.bootstrap.js",
+                      "~/Scripts/typeahead.bundle.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-Minty.css",
+                      "~/Content/DataTables/css/dataTables.bootstrap.css",
+                      "~/Content/typeahead.css",
                       "~/Content/site.css"));
-        }
+        } 
     }
 }
