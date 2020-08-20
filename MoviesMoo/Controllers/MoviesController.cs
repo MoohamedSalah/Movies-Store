@@ -8,7 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MoviesMoo.Models;
+using Microsoft.Office;
 using System.Data.SqlClient;
+using System.Web.UI.WebControls;
+using System.Web.UI;
+
 
 
 
@@ -63,13 +67,45 @@ namespace MoviesMoo.Controllers
             return View();
         }
 
+        private string filePath = "~/Files/";
+        public FileResult DownloadFile()
+        {
+            var sDocument = Server.MapPath(filePath + "Mohamed-Salah-CV.docx");
+            byte[] fileBytes = System.IO.File.ReadAllBytes(sDocument);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, "Mohamed-Salah-CV.docx");
+        }
+
         // POST: Movies/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Movies movies, HttpPostedFileBase Image)
-        { 
-            if(Image!=null)
+        public ActionResult Create(Movies movies, HttpPostedFileBase Image, HttpPostedFileBase FileDocx)
+        {
+
+            object filename = Server.MapPath("~/"+FileDocx.FileName);
+            var AC = new Microsoft.Office.Interop.Word.Application();
+            Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
+            object readOnly = false;
+            object isVisible = true;
+            object missing = System.Reflection.Missing.Value;
+            try
+            {
+                doc = AC.Documents.Open(ref filename, ref missing, ref readOnly, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref isVisible, ref isVisible, ref missing, ref missing, ref missing);
+               movies.DocxContant = doc.Content.Text;
+            }
+            catch 
+            {
+                return HttpNotFound();
+            }
+            if (FileDocx != null)
+            {
+                var fileName = Path.GetFileName(FileDocx.FileName);
+                var path = Path.Combine(Server.MapPath("~/Files/"), fileName);
+                
+                movies.DocxContant = path;
+            }
+
+            if (Image!=null)
             {
                 movies.MoviesPhoto = new byte[Image.ContentLength];
                 Image.InputStream.Read(movies.MoviesPhoto, 0, Image.ContentLength);
@@ -93,7 +129,8 @@ namespace MoviesMoo.Controllers
                     movies.NumberInStock,
                     movies.MemberAvalible,
                     movies.MoviesPhoto,
-                    movies.AltPhoto);
+                    movies.AltPhoto,
+                    movies.DocxContant);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -122,9 +159,19 @@ namespace MoviesMoo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Exclude = "Name")]Movies movies)
+        public ActionResult Edit([Bind(Exclude = "Name")]Movies movies, HttpPostedFileBase Image)
         {
-            movies.Name = db.Movies.SingleOrDefault(x => x.Id == movies.Id).Name;
+            var movie_id = db.Movies.SingleOrDefault(x => x.Id == movies.Id);
+            movies.Name = movie_id.Name;
+
+            if (Image != null)
+            {
+                movies.MoviesPhoto = new byte[Image.ContentLength];
+                Image.InputStream.Read(movies.MoviesPhoto, 0, Image.ContentLength);
+            }
+
+            if (movies.MoviesPhoto == null)
+                movies.MoviesPhoto = movie_id.MoviesPhoto;
 
             if (ModelState.IsValid)
             {
@@ -136,7 +183,8 @@ namespace MoviesMoo.Controllers
                     movies.NumberInStock,
                     movies.MemberAvalible,
                     movies.MoviesPhoto,
-                    movies.AltPhoto);
+                    movies.AltPhoto,
+                    movies.DocxContant);
 
                 db.SaveChanges();
                 return RedirectToAction("Index");

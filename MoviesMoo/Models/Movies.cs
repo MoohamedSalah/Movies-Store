@@ -29,6 +29,7 @@ namespace MoviesMoo.Models
         public Nullable<double> NumberInStock { get; set; }
         public byte[] MoviesPhoto { get; set; }
         public string AltPhoto { get; set; }
+        public string DocxContant { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rentals> Rentals { get; set; }

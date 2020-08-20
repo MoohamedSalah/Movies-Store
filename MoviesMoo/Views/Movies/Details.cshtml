@@ -43,17 +43,20 @@
         <dd>
             @Html.DisplayFor(model => model.NumberInStock)
         </dd>
+        <dt>
+            @Html.DisplayFor(model => model.AltPhoto)
+        </dt>
+        <dd>
+            @{
+                if (Model.MoviesPhoto != null)
+                {
+                    string imageBase64 = Convert.ToBase64String(Model.MoviesPhoto);
+                    string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
 
-        @{
-            if (Model.MoviesPhoto != null)
-            {
-                string imageBase64 = Convert.ToBase64String(Model.MoviesPhoto);
-                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                
-                <img src="@imageSrc" width="80%" height="350" />
+                    <img src="@imageSrc" alt="@Model.AltPhoto" width="300" height="350" />
+                }
             }
-        }
-
+        </dd>
     </dl>
 </div>
 <p>

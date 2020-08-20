@@ -43,7 +43,7 @@ namespace MoviesMoo.Models
 
         public byte[] MoviesPhoto { get; set; }
 
-
+        [Display(Name = "Photo Name")]
         public string AltPhoto { get; set; }
     }
 
