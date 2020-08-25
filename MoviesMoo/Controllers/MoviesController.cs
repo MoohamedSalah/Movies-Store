@@ -79,33 +79,25 @@ namespace MoviesMoo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Movies movies, HttpPostedFileBase Image, HttpPostedFileBase FileDocx)
         {
+            string GenreSubPath ="";
+            switch (movies.Genre)
+            {
+                case "Action":
+                    GenreSubPath = Path.GetFullPath(Server.MapPath("/Files/action.docx"));
+                    break;
+                case "Drama":
+                    GenreSubPath = Path.GetFullPath(Server.MapPath("/Files/Drama.docx"));
+                    break;
+                case "Comedy":
+                    GenreSubPath = Path.GetFullPath(Server.MapPath("/Files/Comedy.docx"));
+                    break;
+                default:
+                    break;
 
-
-            //var fullPath = Path.GetFullPath(FileDocx.FileName);
-            //var xy= FileDocx.ToString();
-            ////Path.GetDirectoryName();
-            //FileInfo fi = new FileInfo(fullPath);
-            //var dir = Environment.SpecialFolder.ProgramFilesX86;
-            //var path = Path.Combine(dir.ToString(), FileDocx.FileName);
-            //var fileName = Path.GetFullPath(path);
-            //var z= Path.GetDirectoryName(FileDocx.FileName);
-            ////1
-            //string fileName2 = FileDocx.FileName;
-            //FileInfo f = new FileInfo(Server.MapPath(fileName2));
-            //string fullname2 = f.FullName;
-            ////2
-            //string filename3 = FileDocx.FileName;
-            //string filePath = AppDomain.CurrentDomain.BaseDirectory + Server.MapPath(filename3);
-            ////3
-            string path4 = Path.GetFullPath("~/Files/"+Server.MapPath(FileDocx.FileName));
-            //4
-            //string fileName5 = FileDocx.FileName;
-            //string currentDirectory = Directory.GetCurrentDirectory();
-            //string[] fullFilePath = Directory.GetFiles(currentDirectory, Server.MapPath(fileName5), SearchOption.AllDirectories);
-
+            }
 
             Application application = new Application();
-            Document document = application.Documents.Open(path4);
+            Document document = application.Documents.Open(GenreSubPath);
 
             // Loop through all words in the document.
             int count = document.Words.Count;
@@ -113,7 +105,6 @@ namespace MoviesMoo.Controllers
             for (int i = 1; i <= count; i++)
             {
                 // Write the word.
-
                 text = text + document.Words[i].Text;
 
             }

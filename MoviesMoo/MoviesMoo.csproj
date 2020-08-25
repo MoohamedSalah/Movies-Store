@@ -533,6 +533,9 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Files\Mohamed-Salah-CV.docx" />
+    <Content Include="Files\action.docx" />
+    <Content Include="Files\Comedy.docx" />
+    <Content Include="Files\Drama.docx" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />

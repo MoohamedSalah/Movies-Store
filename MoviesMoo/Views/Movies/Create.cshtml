@@ -69,12 +69,7 @@
         <div class="form-group col-md-10">
             @Html.ActionLink("Download Doc", "DownloadFile", "Movies")
         </div>
-        <div class="form-group col-md-10">
-            @Html.TextBox("FileDocx", null, new { type = "file", name = "Files1", accept = ".doc, .docx" })
-            <div>
-                @Html.ValidationMessage("Image", "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
