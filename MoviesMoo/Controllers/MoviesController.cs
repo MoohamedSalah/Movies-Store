@@ -12,10 +12,8 @@ using Microsoft.Office;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 using System.Web.UI;
-
-
-
-
+using Microsoft.Office.Interop.Word;
+using System.Reflection;
 
 namespace MoviesMoo.Controllers
 {
@@ -63,7 +61,7 @@ namespace MoviesMoo.Controllers
         public ActionResult Create()
         {
             ViewBag.Genre = Genre(null);
-            ViewBag.FileUpload1 = "";
+            ViewBag.DocxContant = "";
             return View();
         }
 
@@ -82,35 +80,55 @@ namespace MoviesMoo.Controllers
         public ActionResult Create(Movies movies, HttpPostedFileBase Image, HttpPostedFileBase FileDocx)
         {
 
-            object filename = Server.MapPath("~/"+FileDocx.FileName);
-            var AC = new Microsoft.Office.Interop.Word.Application();
-            Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
-            object readOnly = false;
-            object isVisible = true;
-            object missing = System.Reflection.Missing.Value;
-            try
-            {
-                doc = AC.Documents.Open(ref filename, ref missing, ref readOnly, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref isVisible, ref isVisible, ref missing, ref missing, ref missing);
-               movies.DocxContant = doc.Content.Text;
-            }
-            catch 
-            {
-                return HttpNotFound();
-            }
-            if (FileDocx != null)
-            {
-                var fileName = Path.GetFileName(FileDocx.FileName);
-                var path = Path.Combine(Server.MapPath("~/Files/"), fileName);
-                
-                movies.DocxContant = path;
-            }
 
-            if (Image!=null)
+            //var fullPath = Path.GetFullPath(FileDocx.FileName);
+            //var xy= FileDocx.ToString();
+            ////Path.GetDirectoryName();
+            //FileInfo fi = new FileInfo(fullPath);
+            //var dir = Environment.SpecialFolder.ProgramFilesX86;
+            //var path = Path.Combine(dir.ToString(), FileDocx.FileName);
+            //var fileName = Path.GetFullPath(path);
+            //var z= Path.GetDirectoryName(FileDocx.FileName);
+            ////1
+            //string fileName2 = FileDocx.FileName;
+            //FileInfo f = new FileInfo(Server.MapPath(fileName2));
+            //string fullname2 = f.FullName;
+            ////2
+            //string filename3 = FileDocx.FileName;
+            //string filePath = AppDomain.CurrentDomain.BaseDirectory + Server.MapPath(filename3);
+            ////3
+            string path4 = Path.GetFullPath("~/Files/"+Server.MapPath(FileDocx.FileName));
+            //4
+            //string fileName5 = FileDocx.FileName;
+            //string currentDirectory = Directory.GetCurrentDirectory();
+            //string[] fullFilePath = Directory.GetFiles(currentDirectory, Server.MapPath(fileName5), SearchOption.AllDirectories);
+
+
+            Application application = new Application();
+            Document document = application.Documents.Open(path4);
+
+            // Loop through all words in the document.
+            int count = document.Words.Count;
+            string text = "";
+            for (int i = 1; i <= count; i++)
+            {
+                // Write the word.
+
+                text = text + document.Words[i].Text;
+
+            }
+            // Close word.
+            application.Quit();
+            movies.DocxContant = text;
+
+
+            if (Image != null)
             {
                 movies.MoviesPhoto = new byte[Image.ContentLength];
                 Image.InputStream.Read(movies.MoviesPhoto, 0, Image.ContentLength);
             }
-           
+
+
 
             ViewBag.Genre = Genre(null);
             if (db.Movies.Any(x => x.Name == movies.Name))

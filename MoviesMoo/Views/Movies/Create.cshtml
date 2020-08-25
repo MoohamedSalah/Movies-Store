@@ -14,74 +14,74 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Movies</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus", required = "required" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>Movies</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Genre, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Genre", null, new { @class = "form-control" })
-            @Html.ValidationMessage("Genre", "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Genre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Genre", null, new { @class = "form-control" })
+                @Html.ValidationMessage("Genre", "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.ReleasDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ReleasDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ReleasDate, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReleasDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReleasDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReleasDate, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.DateAdd, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DateAdd, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DateAdd, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateAdd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateAdd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateAdd, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.NumberInStock, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.NumberInStock, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-            @Html.ValidationMessageFor(model => model.NumberInStock, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberInStock, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumberInStock, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                @Html.ValidationMessageFor(model => model.NumberInStock, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.AltPhoto, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AltPhoto, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AltPhoto, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.AltPhoto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AltPhoto, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AltPhoto, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group col-md-10">
-        @Html.TextBox("Image", null, new { type = "file", name = "Files", accept = "image/x-png,image/gif,image/jpeg", required = "required" })
-        <div>
-            @Html.ValidationMessage("Image", "", new { @class = "text-danger" })
+        <div class="form-group col-md-10">
+            @Html.TextBox("Image", null, new { type = "file", name = "Files", accept = "image/x-png,image/gif,image/jpeg", required = "required" })
+            <div>
+                @Html.ValidationMessage("Image", "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group col-md-10">
-        @Html.ActionLink("Download Doc", "DownloadFile", "Movies")
-    </div>
-    <div class="form-group col-md-10">
-        @Html.TextBox("FileDocx", null, new { type = "file", name = "Files1", accept = ".doc, .docx" })
-        <div>
-            @Html.ValidationMessage("Image", "", new { @class = "text-danger" })
+        <div class="form-group col-md-10">
+            @Html.ActionLink("Download Doc", "DownloadFile", "Movies")
         </div>
-    </div>
+        <div class="form-group col-md-10">
+            @Html.TextBox("FileDocx", null, new { type = "file", name = "Files1", accept = ".doc, .docx" })
+            <div>
+                @Html.ValidationMessage("Image", "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-primary" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
         </div>
     </div>
-</div>
 }
 
 <div>
@@ -89,23 +89,38 @@
 </div>
 
 @*<script type="text/javascript">
-        $(function () {
-            $("#Name").validate();
+            $(function () {
+                $("#Name").validate();
 
-            $("#Image").validate();
-            //function validateFileType() {
-            //    var fileName = document.getElementById("Image").value;
-            //    var idxDot = fileName.lastIndexOf(".") + 1;
-            //    var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-            //    if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
-            //        //TO DO
-            //    } else {
-            //        alert("Only jpg/jpeg and png files are allowed!");
-            //    }
-            //};
+                $("#Image").validate();
+                //function validateFileType() {
+                //    var fileName = document.getElementById("Image").value;
+                //    var idxDot = fileName.lastIndexOf(".") + 1;
+                //    var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+                //    if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+                //        //TO DO
+                //    } else {
+                //        alert("Only jpg/jpeg and png files are allowed!");
+                //    }
+                //};
 
 
+            });
+
+
+        </script>
+    <script type="text/javascript">
+
+        $(function()
+        {
+            $('#FileDocx').on('change',function ()
+            {
+                var filePath = $(this).val();
+                @{
+                     @ViewBag.DocxContant=filePath;
+                }
+
+            });
         });
-
 
     </script>*@
