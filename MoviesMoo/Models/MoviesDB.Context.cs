@@ -57,7 +57,7 @@ namespace MoviesMoo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSaveCustmoer", idParameter, nameParameter, isSubscribedToNewsLetterParameter, membershipIDParameter, birthdateParameter);
         }
     
-        public virtual int spEditeMovies(Nullable<int> id, string name, string genre, Nullable<System.DateTime> releasDate, Nullable<System.DateTime> dateAdd, Nullable<double> numberInStock, Nullable<int> memberAvalible, byte[] moviesPhoto, string altPhoto, string docxContant)
+        public virtual int spEditeMovies(Nullable<int> id, string name, string genre, Nullable<System.DateTime> releasDate, Nullable<System.DateTime> dateAdd, Nullable<double> numberInStock, Nullable<int> memberAvalible, byte[] moviesPhoto, string altPhoto, string docxContant, string trailerUrl)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -99,10 +99,14 @@ namespace MoviesMoo.Models
                 new ObjectParameter("DocxContant", docxContant) :
                 new ObjectParameter("DocxContant", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEditeMovies", idParameter, nameParameter, genreParameter, releasDateParameter, dateAddParameter, numberInStockParameter, memberAvalibleParameter, moviesPhotoParameter, altPhotoParameter, docxContantParameter);
+            var trailerUrlParameter = trailerUrl != null ?
+                new ObjectParameter("TrailerUrl", trailerUrl) :
+                new ObjectParameter("TrailerUrl", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEditeMovies", idParameter, nameParameter, genreParameter, releasDateParameter, dateAddParameter, numberInStockParameter, memberAvalibleParameter, moviesPhotoParameter, altPhotoParameter, docxContantParameter, trailerUrlParameter);
         }
     
-        public virtual int spCreateMovie(Nullable<int> id, string name, string genre, Nullable<System.DateTime> releasDate, Nullable<System.DateTime> dateAdd, Nullable<double> numberInStock, Nullable<int> memberAvalible, byte[] moviesPhoto, string altPhoto, string docxContant)
+        public virtual int spCreateMovie(Nullable<int> id, string name, string genre, Nullable<System.DateTime> releasDate, Nullable<System.DateTime> dateAdd, Nullable<double> numberInStock, Nullable<int> memberAvalible, byte[] moviesPhoto, string altPhoto, string docxContant, string trailerUrl)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -144,7 +148,11 @@ namespace MoviesMoo.Models
                 new ObjectParameter("DocxContant", docxContant) :
                 new ObjectParameter("DocxContant", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCreateMovie", idParameter, nameParameter, genreParameter, releasDateParameter, dateAddParameter, numberInStockParameter, memberAvalibleParameter, moviesPhotoParameter, altPhotoParameter, docxContantParameter);
+            var trailerUrlParameter = trailerUrl != null ?
+                new ObjectParameter("TrailerUrl", trailerUrl) :
+                new ObjectParameter("TrailerUrl", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCreateMovie", idParameter, nameParameter, genreParameter, releasDateParameter, dateAddParameter, numberInStockParameter, memberAvalibleParameter, moviesPhotoParameter, altPhotoParameter, docxContantParameter, trailerUrlParameter);
         }
     }
 }

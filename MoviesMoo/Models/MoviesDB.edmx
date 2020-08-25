@@ -39,6 +39,7 @@
           <Property Name="MoviesPhoto" Type="varbinary(max)" />
           <Property Name="AltPhoto" Type="nvarchar" MaxLength="50" />
           <Property Name="DocxContant" Type="nvarchar(max)" />
+          <Property Name="TrailerUrl" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Rentals">
           <Key>
@@ -97,6 +98,7 @@
           <Parameter Name="MoviesPhoto" Type="varbinary(max)" Mode="In" />
           <Parameter Name="AltPhoto" Type="nvarchar" Mode="In" />
           <Parameter Name="DocxContant" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="TrailerUrl" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="spEditeMovies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -109,6 +111,7 @@
           <Parameter Name="MoviesPhoto" Type="varbinary(max)" Mode="In" />
           <Parameter Name="AltPhoto" Type="nvarchar" Mode="In" />
           <Parameter Name="DocxContant" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="TrailerUrl" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="spSaveCustmoer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -177,6 +180,7 @@
           <Property Name="MoviesPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="AltPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DocxContant" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrailerUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Customers_MemberShipType">
           <End Role="MemberShipType" Type="Self.MemberShipType" Multiplicity="0..1" />
@@ -225,6 +229,7 @@
             <Parameter Name="MoviesPhoto" Mode="In" Type="Binary" />
             <Parameter Name="AltPhoto" Mode="In" Type="String" />
             <Parameter Name="DocxContant" Mode="In" Type="String" />
+            <Parameter Name="TrailerUrl" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spCreateMovie">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -237,6 +242,7 @@
             <Parameter Name="MoviesPhoto" Mode="In" Type="Binary" />
             <Parameter Name="AltPhoto" Mode="In" Type="String" />
             <Parameter Name="DocxContant" Mode="In" Type="String" />
+            <Parameter Name="TrailerUrl" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Rentals">
@@ -306,6 +312,7 @@
           <EntitySetMapping Name="Movies">
             <EntityTypeMapping TypeName="Models.Movies">
               <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="TrailerUrl" ColumnName="TrailerUrl" />
                 <ScalarProperty Name="DocxContant" ColumnName="DocxContant" />
                 <ScalarProperty Name="AltPhoto" ColumnName="AltPhoto" />
                 <ScalarProperty Name="MoviesPhoto" ColumnName="MoviesPhoto" />

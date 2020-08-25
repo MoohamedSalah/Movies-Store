@@ -45,6 +45,10 @@ namespace MoviesMoo.Models
 
         [Display(Name = "Photo Name")]
         public string AltPhoto { get; set; }
+
+        [Display(Name = "Trailer Url")]
+        [DataType(DataType.Url)]
+        public string TrailerUrl { get; set; }
     }
 
 }

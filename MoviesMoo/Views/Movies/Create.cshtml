@@ -54,12 +54,20 @@
             </div>
         </div>
         <div class="form-group">
+            @Html.LabelFor(model => model.TrailerUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.TrailerUrl, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TrailerUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.AltPhoto, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AltPhoto, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AltPhoto, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group col-md-10">
             @Html.TextBox("Image", null, new { type = "file", name = "Files", accept = "image/x-png,image/gif,image/jpeg", required = "required" })
             <div>
@@ -69,11 +77,9 @@
         <div class="form-group col-md-10">
             @Html.ActionLink("Download Doc", "DownloadFile", "Movies")
         </div>
-        
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" onclick="PlaySound()" />
             </div>
         </div>
     </div>
@@ -84,38 +90,18 @@
 </div>
 
 @*<script type="text/javascript">
-            $(function () {
-                $("#Name").validate();
-
-                $("#Image").validate();
-                //function validateFileType() {
-                //    var fileName = document.getElementById("Image").value;
-                //    var idxDot = fileName.lastIndexOf(".") + 1;
-                //    var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-                //    if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
-                //        //TO DO
-                //    } else {
-                //        alert("Only jpg/jpeg and png files are allowed!");
-                //    }
-                //};
-
-
-            });
-
-
-        </script>
-    <script type="text/javascript">
-
-        $(function()
-        {
-            $('#FileDocx').on('change',function ()
-            {
-                var filePath = $(this).val();
-                @{
-                     @ViewBag.DocxContant=filePath;
+        $(function () {
+            $("#Name").validate();
+            $("#Image").validate();
+            function validateFileType() {
+                var fileName = document.getElementById("Image").value;
+                var idxDot = fileName.lastIndexOf(".") + 1;
+                var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+                if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+                    //TO DO
+                } else {
+                    alert("Only jpg/jpeg and png files are allowed!");
                 }
-
-            });
+            };
         });
-
     </script>*@

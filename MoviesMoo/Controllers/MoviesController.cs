@@ -77,7 +77,7 @@ namespace MoviesMoo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Movies movies, HttpPostedFileBase Image, HttpPostedFileBase FileDocx)
+        public ActionResult Create(Movies movies, HttpPostedFileBase Image)
         {
             string GenreSubPath ="";
             switch (movies.Genre)
@@ -139,7 +139,8 @@ namespace MoviesMoo.Controllers
                     movies.MemberAvalible,
                     movies.MoviesPhoto,
                     movies.AltPhoto,
-                    movies.DocxContant);
+                    movies.DocxContant,
+                    movies.TrailerUrl);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -193,7 +194,8 @@ namespace MoviesMoo.Controllers
                     movies.MemberAvalible,
                     movies.MoviesPhoto,
                     movies.AltPhoto,
-                    movies.DocxContant);
+                    movies.DocxContant,
+                    movies.TrailerUrl);
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
