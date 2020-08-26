@@ -26,6 +26,12 @@ namespace MoviesMoo.Controllers
         {
             return View(db.Movies.ToList());
         }
+        //Movies/MoviesClient
+        public ActionResult MoviesClient()
+        {
+            return View(db.Movies.ToList());
+        }
+
 
         public JsonResult IsUserNameAvailableMov(string Name)
         {

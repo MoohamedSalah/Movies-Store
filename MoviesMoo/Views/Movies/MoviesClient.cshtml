@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MoviesMoo.Models.Movies>
+@{ }
+
+
+<link href="~/Content/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/Content/fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+<h2>Best Movies to Watch While You're Stuck At Home</h2>
+<div id="portfolio-wrapper">
+    <div id="portfolio" class="container">
+
+        @foreach (var item in Model)
+        {
+            <div class="column">
+                <div class="title">
+                    <h3>
+                        @item.Name
+                    </h3>
+
+                </div>
+                <div>
+                    <a href="~/Movies/Details/@item.Id" class="image image-full">
+                        @{
+                            if (item.MoviesPhoto != null)
+                            {
+                                string imageBase64 = Convert.ToBase64String(item.MoviesPhoto);
+                                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+
+                                <img src="@imageSrc" alt="@item.AltPhoto" width="300" height="350" />
+                            }
+                        }
+                    </a>
+                </div>
+               
+                <div>
+
+                    <a href="~/Movies/Details/@item.Id" class="icon icon-arrow-right btn btn-primary">Read More About This Moives</a>
+                </div>
+            </div>
+        }
+
+
+
+
+    </div>
+</div>

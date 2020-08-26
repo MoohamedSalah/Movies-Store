@@ -27,10 +27,12 @@ namespace MoviesMoo.Models
         public string Genre { get; set; }
 
         [Required]
+        [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
         public Nullable<System.DateTime> ReleasDate { get; set; }
 
         [Required]
+        [Display(Name = "Date Add")]
         [DataType(DataType.Date)]
         public Nullable<System.DateTime> DateAdd { get; set; }
 
@@ -47,7 +49,7 @@ namespace MoviesMoo.Models
         public string AltPhoto { get; set; }
 
         [Display(Name = "Trailer Url")]
-        [DataType(DataType.Url)]
+        [Url]
         public string TrailerUrl { get; set; }
     }
 
