@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MoviesMoo</RootNamespace>
     <AssemblyName>MoviesMoo</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -27,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -121,8 +122,6 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -147,9 +146,7 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -405,27 +402,25 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+<<<<<<< Updated upstream
+=======
+    <Content Include="images\mixMovies1.jpg" />
+    <Content Include="images\MixMovie2.jpg" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap-Minty.css" />
+>>>>>>> Stashed changes
     <Content Include="Models\MoviesDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MoviesDB.Context.cs</LastGenOutput>
       <DependentUpon>MoviesDB.edmx</DependentUpon>
+      <LastGenOutput>MoviesDB.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\MoviesDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MoviesDB.edmx</DependentUpon>
       <LastGenOutput>MoviesDB.cs</LastGenOutput>
     </Content>
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\MoviesDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MoviesDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\MoviesDB.edmx.diagram">
-      <DependentUpon>MoviesDB.edmx</DependentUpon>
-    </Content>
-    <Content Include="Content\bootstrap-Minty.css" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootbox.js" />
@@ -536,6 +531,13 @@
     <Content Include="Files\action.docx" />
     <Content Include="Files\Comedy.docx" />
     <Content Include="Files\Drama.docx" />
+    <EntityDeploy Include="Models\MoviesDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MoviesDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MoviesDB.edmx.diagram">
+      <DependentUpon>MoviesDB.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />

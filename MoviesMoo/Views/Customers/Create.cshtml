@@ -49,7 +49,7 @@
 
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.Customers.IsSubscribedToNewsLetter)<b> Is Subscribed To News Letter</b>
+                    @Html.DisplayFor(model => model.Customers.IsSubscribedToNewsLetter)<b> Is Subscribed To News Letter</b>
                     @Html.ValidationMessageFor(model => model.Customers.IsSubscribedToNewsLetter, "", new { @class = "text-danger" })
                 </div>
             </div>
