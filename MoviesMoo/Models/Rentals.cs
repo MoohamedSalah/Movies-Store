@@ -17,8 +17,8 @@ namespace MoviesMoo.Models
         public int Id { get; set; }
         public System.DateTime DateRented { get; set; }
         public Nullable<System.DateTime> DateReturn { get; set; }
-        public int Custmer_id { get; set; }
-        public int Movie_id { get; set; }
+        public Nullable<int> Custmer_id { get; set; }
+        public Nullable<int> Movie_id { get; set; }
     
         public virtual Customers Customers { get; set; }
         public virtual Movies Movies { get; set; }

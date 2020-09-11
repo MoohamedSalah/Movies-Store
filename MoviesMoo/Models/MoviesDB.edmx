@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MoviesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="225" />
           <Property Name="IsSubscribedToNewsLetter" Type="bit" />
           <Property Name="MembershipID" Type="int" />
           <Property Name="Birthdate" Type="date" />
@@ -20,7 +20,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="225" />
           <Property Name="SignUPFree" Type="int" />
           <Property Name="DurationInMenths" Type="int" />
           <Property Name="DiscountRate" Type="int" />
@@ -30,26 +30,26 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Genre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="50" />
           <Property Name="ReleasDate" Type="date" />
           <Property Name="DateAdd" Type="date" />
-          <Property Name="NumberInStock" Type="float" />
           <Property Name="MemberAvalible" Type="int" />
+          <Property Name="NumberInStock" Type="float" />
           <Property Name="MoviesPhoto" Type="varbinary(max)" />
-          <Property Name="AltPhoto" Type="nvarchar" MaxLength="50" />
-          <Property Name="DocxContant" Type="nvarchar(max)" />
-          <Property Name="TrailerUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="AltPhoto" Type="nvarchar" MaxLength="225" />
+          <Property Name="DocxContant" Type="nvarchar" MaxLength="225" />
+          <Property Name="TrailerUrl" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Rentals">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DateRented" Type="datetime" Nullable="false" />
-          <Property Name="DateReturn" Type="datetime" />
-          <Property Name="Custmer_id" Type="int" Nullable="false" />
-          <Property Name="Movie_id" Type="int" Nullable="false" />
+          <Property Name="DateRented" Type="date" Nullable="false" />
+          <Property Name="DateReturn" Type="date" />
+          <Property Name="Custmer_id" Type="int" />
+          <Property Name="Movie_id" Type="int" />
         </EntityType>
         <Association Name="FK_Customers_MemberShipType">
           <End Role="MemberShipType" Type="Self.MemberShipType" Multiplicity="0..1" />
@@ -64,7 +64,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rentals_Customers">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
           <End Role="Rentals" Type="Self.Rentals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
@@ -76,7 +76,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rentals_Movies">
-          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Movies" Type="Self.Movies" Multiplicity="0..1" />
           <End Role="Rentals" Type="Self.Rentals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Movies">
@@ -88,39 +88,38 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="spCreateMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="Name" Type="nvarchar" Mode="In" />
-          <Parameter Name="Genre" Type="nvarchar" Mode="In" />
-          <Parameter Name="ReleasDate" Type="date" Mode="In" />
+          <Parameter Name="Genra" Type="nvarchar" Mode="In" />
+          <Parameter Name="RelateasDate" Type="date" Mode="In" />
           <Parameter Name="DateAdd" Type="date" Mode="In" />
-          <Parameter Name="NumberInStock" Type="float" Mode="In" />
           <Parameter Name="MemberAvalible" Type="int" Mode="In" />
+          <Parameter Name="NumberInStock" Type="float" Mode="In" />
           <Parameter Name="MoviesPhoto" Type="varbinary(max)" Mode="In" />
           <Parameter Name="AltPhoto" Type="nvarchar" Mode="In" />
-          <Parameter Name="DocxContant" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DoxContant" Type="nvarchar" Mode="In" />
           <Parameter Name="TrailerUrl" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="spEditeMovies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
+        <Function Name="spEditeMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="Name" Type="nvarchar" Mode="In" />
-          <Parameter Name="Genre" Type="nvarchar" Mode="In" />
-          <Parameter Name="ReleasDate" Type="date" Mode="In" />
+          <Parameter Name="Genra" Type="nvarchar" Mode="In" />
+          <Parameter Name="RelateasDate" Type="date" Mode="In" />
           <Parameter Name="DateAdd" Type="date" Mode="In" />
-          <Parameter Name="NumberInStock" Type="float" Mode="In" />
           <Parameter Name="MemberAvalible" Type="int" Mode="In" />
+          <Parameter Name="NumberInStock" Type="float" Mode="In" />
           <Parameter Name="MoviesPhoto" Type="varbinary(max)" Mode="In" />
           <Parameter Name="AltPhoto" Type="nvarchar" Mode="In" />
-          <Parameter Name="DocxContant" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DoxContant" Type="nvarchar" Mode="In" />
           <Parameter Name="TrailerUrl" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="spSaveCustmoer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
+        <Function Name="spSaveCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="Name" Type="nvarchar" Mode="In" />
           <Parameter Name="IsSubscribedToNewsLetter" Type="bit" Mode="In" />
           <Parameter Name="MembershipID" Type="int" Mode="In" />
           <Parameter Name="Birthdate" Type="date" Mode="In" />
         </Function>
-        <EntityContainer Name="ModelsStoreContainer">
+        <EntityContainer Name="MoviesDBModelStoreContainer">
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberShipType" EntityType="Self.MemberShipType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
@@ -141,25 +140,25 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="MoviesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
           <Property Name="IsSubscribedToNewsLetter" Type="Boolean" />
           <Property Name="MembershipID" Type="Int32" />
-          <NavigationProperty Name="MemberShipType" Relationship="Self.FK_Customers_MemberShipType" FromRole="Customers" ToRole="MemberShipType" />
           <Property Name="Birthdate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Rentals" Relationship="Models.FK_Rentals_Customers" FromRole="Customers" ToRole="Rentals" />
+          <NavigationProperty Name="MemberShipType" Relationship="Self.FK_Customers_MemberShipType" FromRole="Customers" ToRole="MemberShipType" />
+          <NavigationProperty Name="Rentals" Relationship="Self.FK_Rentals_Customers" FromRole="Customers" ToRole="Rentals" />
         </EntityType>
         <EntityType Name="MemberShipType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
           <Property Name="SignUPFree" Type="Int32" />
           <Property Name="DurationInMenths" Type="Int32" />
           <Property Name="DiscountRate" Type="Int32" />
@@ -170,17 +169,29 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Genre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ReleasDate" Type="DateTime" Precision="0" />
           <Property Name="DateAdd" Type="DateTime" Precision="0" />
           <Property Name="MemberAvalible" Type="Int32" />
-          <NavigationProperty Name="Rentals" Relationship="Models.FK_Rentals_Movies" FromRole="Movies" ToRole="Rentals" />
           <Property Name="NumberInStock" Type="Double" />
           <Property Name="MoviesPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="AltPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DocxContant" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TrailerUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AltPhoto" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
+          <Property Name="DocxContant" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
+          <Property Name="TrailerUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rentals" Relationship="Self.FK_Rentals_Movies" FromRole="Movies" ToRole="Rentals" />
+        </EntityType>
+        <EntityType Name="Rentals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateRented" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateReturn" Type="DateTime" Precision="0" />
+          <Property Name="Custmer_id" Type="Int32" />
+          <Property Name="Movie_id" Type="Int32" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Rentals_Customers" FromRole="Rentals" ToRole="Customers" />
+          <NavigationProperty Name="Movies" Relationship="Self.FK_Rentals_Movies" FromRole="Rentals" ToRole="Movies" />
         </EntityType>
         <Association Name="FK_Customers_MemberShipType">
           <End Role="MemberShipType" Type="Self.MemberShipType" Multiplicity="0..1" />
@@ -194,72 +205,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MoviesDBconnectionstring" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Customers" EntityType="Self.Customers" />
-          <EntitySet Name="MemberShipType" EntityType="Self.MemberShipType" />
-          <EntitySet Name="Movies" EntityType="Self.Movies" />
-          <AssociationSet Name="FK_Customers_MemberShipType" Association="Self.FK_Customers_MemberShipType">
-            <End Role="MemberShipType" EntitySet="MemberShipType" />
-            <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
-          <EntitySet Name="Rentals" EntityType="Models.Rentals" />
-          <AssociationSet Name="FK_Rentals_Customers" Association="Models.FK_Rentals_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Rentals" EntitySet="Rentals" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Rentals_Movies" Association="Models.FK_Rentals_Movies">
-            <End Role="Movies" EntitySet="Movies" />
-            <End Role="Rentals" EntitySet="Rentals" />
-          </AssociationSet>
-          <FunctionImport Name="spSaveCustmoer">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
-            <Parameter Name="Name" Mode="In" Type="String" />
-            <Parameter Name="IsSubscribedToNewsLetter" Mode="In" Type="Boolean" />
-            <Parameter Name="MembershipID" Mode="In" Type="Int32" />
-            <Parameter Name="Birthdate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="spEditeMovies">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
-            <Parameter Name="Name" Mode="In" Type="String" />
-            <Parameter Name="Genre" Mode="In" Type="String" />
-            <Parameter Name="ReleasDate" Mode="In" Type="DateTime" />
-            <Parameter Name="DateAdd" Mode="In" Type="DateTime" />
-            <Parameter Name="NumberInStock" Mode="In" Type="Double" />
-            <Parameter Name="MemberAvalible" Mode="In" Type="Int32" />
-            <Parameter Name="MoviesPhoto" Mode="In" Type="Binary" />
-            <Parameter Name="AltPhoto" Mode="In" Type="String" />
-            <Parameter Name="DocxContant" Mode="In" Type="String" />
-            <Parameter Name="TrailerUrl" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="spCreateMovie">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
-            <Parameter Name="Name" Mode="In" Type="String" />
-            <Parameter Name="Genre" Mode="In" Type="String" />
-            <Parameter Name="ReleasDate" Mode="In" Type="DateTime" />
-            <Parameter Name="DateAdd" Mode="In" Type="DateTime" />
-            <Parameter Name="NumberInStock" Mode="In" Type="Double" />
-            <Parameter Name="MemberAvalible" Mode="In" Type="Int32" />
-            <Parameter Name="MoviesPhoto" Mode="In" Type="Binary" />
-            <Parameter Name="AltPhoto" Mode="In" Type="String" />
-            <Parameter Name="DocxContant" Mode="In" Type="String" />
-            <Parameter Name="TrailerUrl" Mode="In" Type="String" />
-          </FunctionImport>
-        </EntityContainer>
-        <EntityType Name="Rentals">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateRented" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateReturn" Type="DateTime" Precision="3" />
-          <Property Name="Custmer_id" Type="Int32" Nullable="false" />
-          <Property Name="Movie_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customers" Relationship="Models.FK_Rentals_Customers" FromRole="Rentals" ToRole="Customers" />
-          <NavigationProperty Name="Movies" Relationship="Models.FK_Rentals_Movies" FromRole="Rentals" ToRole="Movies" />
-        </EntityType>
         <Association Name="FK_Rentals_Customers">
-          <End Type="Models.Customers" Role="Customers" Multiplicity="1" />
-          <End Type="Models.Rentals" Role="Rentals" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Rentals" Type="Self.Rentals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="Id" />
@@ -270,8 +218,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rentals_Movies">
-          <End Type="Models.Movies" Role="Movies" Multiplicity="1" />
-          <End Type="Models.Rentals" Role="Rentals" Multiplicity="*" />
+          <End Role="Movies" Type="Self.Movies" Multiplicity="0..1" />
+          <End Role="Rentals" Type="Self.Rentals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Movies">
               <PropertyRef Name="Id" />
@@ -281,25 +229,75 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="MoviesDBconnectionstring" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="MemberShipType" EntityType="Self.MemberShipType" />
+          <EntitySet Name="Movies" EntityType="Self.Movies" />
+          <EntitySet Name="Rentals" EntityType="Self.Rentals" />
+          <AssociationSet Name="FK_Customers_MemberShipType" Association="Self.FK_Customers_MemberShipType">
+            <End Role="MemberShipType" EntitySet="MemberShipType" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rentals_Customers" Association="Self.FK_Rentals_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Rentals" EntitySet="Rentals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rentals_Movies" Association="Self.FK_Rentals_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Rentals" EntitySet="Rentals" />
+          </AssociationSet>
+          <FunctionImport Name="spCreateMovie">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Genra" Mode="In" Type="String" />
+            <Parameter Name="RelateasDate" Mode="In" Type="DateTime" />
+            <Parameter Name="DateAdd" Mode="In" Type="DateTime" />
+            <Parameter Name="MemberAvalible" Mode="In" Type="Int32" />
+            <Parameter Name="NumberInStock" Mode="In" Type="Double" />
+            <Parameter Name="MoviesPhoto" Mode="In" Type="Binary" />
+            <Parameter Name="AltPhoto" Mode="In" Type="String" />
+            <Parameter Name="DoxContant" Mode="In" Type="String" />
+            <Parameter Name="TrailerUrl" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spEditeMovie">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Genra" Mode="In" Type="String" />
+            <Parameter Name="RelateasDate" Mode="In" Type="DateTime" />
+            <Parameter Name="DateAdd" Mode="In" Type="DateTime" />
+            <Parameter Name="MemberAvalible" Mode="In" Type="Int32" />
+            <Parameter Name="NumberInStock" Mode="In" Type="Double" />
+            <Parameter Name="MoviesPhoto" Mode="In" Type="Binary" />
+            <Parameter Name="AltPhoto" Mode="In" Type="String" />
+            <Parameter Name="DoxContant" Mode="In" Type="String" />
+            <Parameter Name="TrailerUrl" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSaveCustomer">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="IsSubscribedToNewsLetter" Mode="In" Type="Boolean" />
+            <Parameter Name="MembershipID" Mode="In" Type="Int32" />
+            <Parameter Name="Birthdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="MoviesDBconnectionstring">
+        <EntityContainerMapping StorageEntityContainer="MoviesDBModelStoreContainer" CdmEntityContainer="MoviesDBconnectionstring">
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="Models.Customers">
+            <EntityTypeMapping TypeName="MoviesDBModel.Customers">
               <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsSubscribedToNewsLetter" ColumnName="IsSubscribedToNewsLetter" />
                 <ScalarProperty Name="MembershipID" ColumnName="MembershipID" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MemberShipType">
-            <EntityTypeMapping TypeName="Models.MemberShipType">
+            <EntityTypeMapping TypeName="MoviesDBModel.MemberShipType">
               <MappingFragment StoreEntitySet="MemberShipType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -310,36 +308,36 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Movies">
-            <EntityTypeMapping TypeName="Models.Movies">
+            <EntityTypeMapping TypeName="MoviesDBModel.Movies">
               <MappingFragment StoreEntitySet="Movies">
-                <ScalarProperty Name="TrailerUrl" ColumnName="TrailerUrl" />
-                <ScalarProperty Name="DocxContant" ColumnName="DocxContant" />
-                <ScalarProperty Name="AltPhoto" ColumnName="AltPhoto" />
-                <ScalarProperty Name="MoviesPhoto" ColumnName="MoviesPhoto" />
-                <ScalarProperty Name="NumberInStock" ColumnName="NumberInStock" />
-                <ScalarProperty Name="MemberAvalible" ColumnName="MemberAvalible" />
-                <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
-                <ScalarProperty Name="ReleasDate" ColumnName="ReleasDate" />
-                <ScalarProperty Name="Genre" ColumnName="Genre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="ReleasDate" ColumnName="ReleasDate" />
+                <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+                <ScalarProperty Name="MemberAvalible" ColumnName="MemberAvalible" />
+                <ScalarProperty Name="NumberInStock" ColumnName="NumberInStock" />
+                <ScalarProperty Name="MoviesPhoto" ColumnName="MoviesPhoto" />
+                <ScalarProperty Name="AltPhoto" ColumnName="AltPhoto" />
+                <ScalarProperty Name="DocxContant" ColumnName="DocxContant" />
+                <ScalarProperty Name="TrailerUrl" ColumnName="TrailerUrl" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rentals">
-            <EntityTypeMapping TypeName="Models.Rentals">
+            <EntityTypeMapping TypeName="MoviesDBModel.Rentals">
               <MappingFragment StoreEntitySet="Rentals">
-                <ScalarProperty Name="Movie_id" ColumnName="Movie_id" />
-                <ScalarProperty Name="Custmer_id" ColumnName="Custmer_id" />
-                <ScalarProperty Name="DateReturn" ColumnName="DateReturn" />
-                <ScalarProperty Name="DateRented" ColumnName="DateRented" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateRented" ColumnName="DateRented" />
+                <ScalarProperty Name="DateReturn" ColumnName="DateReturn" />
+                <ScalarProperty Name="Custmer_id" ColumnName="Custmer_id" />
+                <ScalarProperty Name="Movie_id" ColumnName="Movie_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spSaveCustmoer" FunctionName="Models.Store.spSaveCustmoer" />
-          <FunctionImportMapping FunctionImportName="spEditeMovies" FunctionName="Models.Store.spEditeMovies" />
-          <FunctionImportMapping FunctionImportName="spCreateMovie" FunctionName="Models.Store.spCreateMovie" />
+          <FunctionImportMapping FunctionImportName="spCreateMovie" FunctionName="MoviesDBModel.Store.spCreateMovie" />
+          <FunctionImportMapping FunctionImportName="spEditeMovie" FunctionName="MoviesDBModel.Store.spEditeMovie" />
+          <FunctionImportMapping FunctionImportName="spSaveCustomer" FunctionName="MoviesDBModel.Store.spSaveCustomer" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
