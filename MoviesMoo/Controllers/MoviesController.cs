@@ -136,7 +136,7 @@ namespace MoviesMoo.Controllers
 
             if (ModelState.IsValid)
             {
-                db.spCreateMovie(movies.Id,
+                db.spCreateMovie(
                     movies.Name,
                     movies.Genre,
                     movies.ReleasDate,
@@ -191,7 +191,8 @@ namespace MoviesMoo.Controllers
 
             if (ModelState.IsValid)
             {
-                db.spEditeMovies(movies.Id,
+                db.spEditeMovie
+                    (movies.Id,
                     movies.Name,
                     movies.Genre,
                     movies.ReleasDate,

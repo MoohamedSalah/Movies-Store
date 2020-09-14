@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8656d1f798834e62a40aa22aac80e50e" Name="Diagram1">
-        <EntityTypeShape EntityType="Models.Customers" Width="1.5" PointX="3.375" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.MemberShipType" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Movies" Width="1.5" PointX="8.5" PointY="0.5" IsExpanded="true" />
-        <AssociationConnector Association="Models.FK_Customers_MemberShipType" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Models.Rentals" Width="1.5" PointX="6.125" PointY="3.875" />
-        <AssociationConnector Association="Models.FK_Rentals_Customers" />
-        <AssociationConnector Association="Models.FK_Rentals_Movies" />
+      <Diagram DiagramId="7b2efe6d429a48b18ac5d05a0550d496" Name="Diagram1">
+        <EntityTypeShape EntityType="MoviesDBModel.Customers" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviesDBModel.MemberShipType" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviesDBModel.Movies" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoviesDBModel.Rentals" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MoviesDBModel.FK_Customers_MemberShipType" ManuallyRouted="false" />
+        <AssociationConnector Association="MoviesDBModel.FK_Rentals_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="MoviesDBModel.FK_Rentals_Movies" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

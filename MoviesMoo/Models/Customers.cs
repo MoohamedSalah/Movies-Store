@@ -22,7 +22,7 @@ namespace MoviesMoo.Models
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<bool> IsSubscribedToNewsLetter { get; set; }
+        public bool IsSubscribedToNewsLetter { get; set; }
         public Nullable<int> MembershipID { get; set; }
         public Nullable<System.DateTime> Birthdate { get; set; }
     

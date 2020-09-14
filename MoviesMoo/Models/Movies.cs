@@ -26,7 +26,7 @@ namespace MoviesMoo.Models
         public Nullable<System.DateTime> ReleasDate { get; set; }
         public Nullable<System.DateTime> DateAdd { get; set; }
         public Nullable<int> MemberAvalible { get; set; }
-        public Nullable<double> NumberInStock { get; set; }
+        public Nullable<int> NumberInStock { get; set; }
         public byte[] MoviesPhoto { get; set; }
         public string AltPhoto { get; set; }
         public string DocxContant { get; set; }

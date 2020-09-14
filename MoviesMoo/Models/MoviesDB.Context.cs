@@ -32,11 +32,105 @@ namespace MoviesMoo.Models
         public virtual DbSet<Movies> Movies { get; set; }
         public virtual DbSet<Rentals> Rentals { get; set; }
     
-        public virtual int spSaveCustmoer(Nullable<int> id, string name, Nullable<bool> isSubscribedToNewsLetter, Nullable<int> membershipID, Nullable<System.DateTime> birthdate)
+        public virtual int spCreateMovie(string name, string genra, Nullable<System.DateTime> relateasDate, Nullable<System.DateTime> dateAdd, Nullable<int> memberAvalible, Nullable<int> numberInStock, byte[] moviesPhoto, string altPhoto, string doxContant, string trailerUrl)
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var genraParameter = genra != null ?
+                new ObjectParameter("Genra", genra) :
+                new ObjectParameter("Genra", typeof(string));
+    
+            var relateasDateParameter = relateasDate.HasValue ?
+                new ObjectParameter("RelateasDate", relateasDate) :
+                new ObjectParameter("RelateasDate", typeof(System.DateTime));
+    
+            var dateAddParameter = dateAdd.HasValue ?
+                new ObjectParameter("DateAdd", dateAdd) :
+                new ObjectParameter("DateAdd", typeof(System.DateTime));
+    
+            var memberAvalibleParameter = memberAvalible.HasValue ?
+                new ObjectParameter("MemberAvalible", memberAvalible) :
+                new ObjectParameter("MemberAvalible", typeof(int));
+    
+            var numberInStockParameter = numberInStock.HasValue ?
+                new ObjectParameter("NumberInStock", numberInStock) :
+                new ObjectParameter("NumberInStock", typeof(int));
+    
+            var moviesPhotoParameter = moviesPhoto != null ?
+                new ObjectParameter("MoviesPhoto", moviesPhoto) :
+                new ObjectParameter("MoviesPhoto", typeof(byte[]));
+    
+            var altPhotoParameter = altPhoto != null ?
+                new ObjectParameter("AltPhoto", altPhoto) :
+                new ObjectParameter("AltPhoto", typeof(string));
+    
+            var doxContantParameter = doxContant != null ?
+                new ObjectParameter("DoxContant", doxContant) :
+                new ObjectParameter("DoxContant", typeof(string));
+    
+            var trailerUrlParameter = trailerUrl != null ?
+                new ObjectParameter("TrailerUrl", trailerUrl) :
+                new ObjectParameter("TrailerUrl", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCreateMovie", nameParameter, genraParameter, relateasDateParameter, dateAddParameter, memberAvalibleParameter, numberInStockParameter, moviesPhotoParameter, altPhotoParameter, doxContantParameter, trailerUrlParameter);
+        }
+    
+        public virtual int spEditeMovie(Nullable<int> iD, string name, string genra, Nullable<System.DateTime> relateasDate, Nullable<System.DateTime> dateAdd, Nullable<int> memberAvalible, Nullable<int> numberInStock, byte[] moviesPhoto, string altPhoto, string doxContant, string trailerUrl)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var genraParameter = genra != null ?
+                new ObjectParameter("Genra", genra) :
+                new ObjectParameter("Genra", typeof(string));
+    
+            var relateasDateParameter = relateasDate.HasValue ?
+                new ObjectParameter("RelateasDate", relateasDate) :
+                new ObjectParameter("RelateasDate", typeof(System.DateTime));
+    
+            var dateAddParameter = dateAdd.HasValue ?
+                new ObjectParameter("DateAdd", dateAdd) :
+                new ObjectParameter("DateAdd", typeof(System.DateTime));
+    
+            var memberAvalibleParameter = memberAvalible.HasValue ?
+                new ObjectParameter("MemberAvalible", memberAvalible) :
+                new ObjectParameter("MemberAvalible", typeof(int));
+    
+            var numberInStockParameter = numberInStock.HasValue ?
+                new ObjectParameter("NumberInStock", numberInStock) :
+                new ObjectParameter("NumberInStock", typeof(int));
+    
+            var moviesPhotoParameter = moviesPhoto != null ?
+                new ObjectParameter("MoviesPhoto", moviesPhoto) :
+                new ObjectParameter("MoviesPhoto", typeof(byte[]));
+    
+            var altPhotoParameter = altPhoto != null ?
+                new ObjectParameter("AltPhoto", altPhoto) :
+                new ObjectParameter("AltPhoto", typeof(string));
+    
+            var doxContantParameter = doxContant != null ?
+                new ObjectParameter("DoxContant", doxContant) :
+                new ObjectParameter("DoxContant", typeof(string));
+    
+            var trailerUrlParameter = trailerUrl != null ?
+                new ObjectParameter("TrailerUrl", trailerUrl) :
+                new ObjectParameter("TrailerUrl", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEditeMovie", iDParameter, nameParameter, genraParameter, relateasDateParameter, dateAddParameter, memberAvalibleParameter, numberInStockParameter, moviesPhotoParameter, altPhotoParameter, doxContantParameter, trailerUrlParameter);
+        }
+    
+        public virtual int spSaveCustomer(Nullable<int> iD, string name, Nullable<bool> isSubscribedToNewsLetter, Nullable<int> membershipID, Nullable<System.DateTime> birthdate)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
     
             var nameParameter = name != null ?
                 new ObjectParameter("Name", name) :
@@ -54,105 +148,7 @@ namespace MoviesMoo.Models
                 new ObjectParameter("Birthdate", birthdate) :
                 new ObjectParameter("Birthdate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSaveCustmoer", idParameter, nameParameter, isSubscribedToNewsLetterParameter, membershipIDParameter, birthdateParameter);
-        }
-    
-        public virtual int spEditeMovies(Nullable<int> id, string name, string genre, Nullable<System.DateTime> releasDate, Nullable<System.DateTime> dateAdd, Nullable<double> numberInStock, Nullable<int> memberAvalible, byte[] moviesPhoto, string altPhoto, string docxContant, string trailerUrl)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            var genreParameter = genre != null ?
-                new ObjectParameter("Genre", genre) :
-                new ObjectParameter("Genre", typeof(string));
-    
-            var releasDateParameter = releasDate.HasValue ?
-                new ObjectParameter("ReleasDate", releasDate) :
-                new ObjectParameter("ReleasDate", typeof(System.DateTime));
-    
-            var dateAddParameter = dateAdd.HasValue ?
-                new ObjectParameter("DateAdd", dateAdd) :
-                new ObjectParameter("DateAdd", typeof(System.DateTime));
-    
-            var numberInStockParameter = numberInStock.HasValue ?
-                new ObjectParameter("NumberInStock", numberInStock) :
-                new ObjectParameter("NumberInStock", typeof(double));
-    
-            var memberAvalibleParameter = memberAvalible.HasValue ?
-                new ObjectParameter("MemberAvalible", memberAvalible) :
-                new ObjectParameter("MemberAvalible", typeof(int));
-    
-            var moviesPhotoParameter = moviesPhoto != null ?
-                new ObjectParameter("MoviesPhoto", moviesPhoto) :
-                new ObjectParameter("MoviesPhoto", typeof(byte[]));
-    
-            var altPhotoParameter = altPhoto != null ?
-                new ObjectParameter("AltPhoto", altPhoto) :
-                new ObjectParameter("AltPhoto", typeof(string));
-    
-            var docxContantParameter = docxContant != null ?
-                new ObjectParameter("DocxContant", docxContant) :
-                new ObjectParameter("DocxContant", typeof(string));
-    
-            var trailerUrlParameter = trailerUrl != null ?
-                new ObjectParameter("TrailerUrl", trailerUrl) :
-                new ObjectParameter("TrailerUrl", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEditeMovies", idParameter, nameParameter, genreParameter, releasDateParameter, dateAddParameter, numberInStockParameter, memberAvalibleParameter, moviesPhotoParameter, altPhotoParameter, docxContantParameter, trailerUrlParameter);
-        }
-    
-        public virtual int spCreateMovie(Nullable<int> id, string name, string genre, Nullable<System.DateTime> releasDate, Nullable<System.DateTime> dateAdd, Nullable<double> numberInStock, Nullable<int> memberAvalible, byte[] moviesPhoto, string altPhoto, string docxContant, string trailerUrl)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            var genreParameter = genre != null ?
-                new ObjectParameter("Genre", genre) :
-                new ObjectParameter("Genre", typeof(string));
-    
-            var releasDateParameter = releasDate.HasValue ?
-                new ObjectParameter("ReleasDate", releasDate) :
-                new ObjectParameter("ReleasDate", typeof(System.DateTime));
-    
-            var dateAddParameter = dateAdd.HasValue ?
-                new ObjectParameter("DateAdd", dateAdd) :
-                new ObjectParameter("DateAdd", typeof(System.DateTime));
-    
-            var numberInStockParameter = numberInStock.HasValue ?
-                new ObjectParameter("NumberInStock", numberInStock) :
-                new ObjectParameter("NumberInStock", typeof(double));
-    
-            var memberAvalibleParameter = memberAvalible.HasValue ?
-                new ObjectParameter("MemberAvalible", memberAvalible) :
-                new ObjectParameter("MemberAvalible", typeof(int));
-    
-            var moviesPhotoParameter = moviesPhoto != null ?
-                new ObjectParameter("MoviesPhoto", moviesPhoto) :
-                new ObjectParameter("MoviesPhoto", typeof(byte[]));
-    
-            var altPhotoParameter = altPhoto != null ?
-                new ObjectParameter("AltPhoto", altPhoto) :
-                new ObjectParameter("AltPhoto", typeof(string));
-    
-            var docxContantParameter = docxContant != null ?
-                new ObjectParameter("DocxContant", docxContant) :
-                new ObjectParameter("DocxContant", typeof(string));
-    
-            var trailerUrlParameter = trailerUrl != null ?
-                new ObjectParameter("TrailerUrl", trailerUrl) :
-                new ObjectParameter("TrailerUrl", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCreateMovie", idParameter, nameParameter, genreParameter, releasDateParameter, dateAddParameter, numberInStockParameter, memberAvalibleParameter, moviesPhotoParameter, altPhotoParameter, docxContantParameter, trailerUrlParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSaveCustomer", iDParameter, nameParameter, isSubscribedToNewsLetterParameter, membershipIDParameter, birthdateParameter);
         }
     }
 }

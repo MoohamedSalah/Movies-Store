@@ -107,7 +107,8 @@ namespace MoviesMoo.Controllers
 
             if (ModelState.IsValid)
             {
-                db.spSaveCustmoer(customers.Id,
+                db.spSaveCustomer
+                    (customers.Id,
                     customers.Name,
                     customers.IsSubscribedToNewsLetter,
                     customers.MembershipID,
